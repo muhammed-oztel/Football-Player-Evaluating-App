@@ -1,0 +1,50 @@
+{% if session['logged_in'] %}
+    {% extends "layout.html" %}
+{% else %}
+    {% extends "template.html" %}
+{% endif %}
+{% block content %}
+    <body>
+
+    <p>
+        <select id="country" onchange="update()">
+            <option selected="selected">Select Country</option>
+            <option value="1">Albania</option>
+            <option value="2">Kosovo</option>
+            <option value="3">Germany</option>
+        </select>
+    </p>
+    <p>
+        <select id="city">
+            <option selected="selected">Select City</option>
+        </select>
+    </p>
+    <script type="text/javascript">
+        function update() {
+            var albania = ["Tirana", "Durres", "Vlore", "Shkoder"];
+            var kosovo = ["Prishtina", "Mitrovica", "Peje", "Gjakove"];
+            var germany = ["Berlin", "Frankfurt", "Hannover", "Bonn"];
+            var countries = document.getElementById("country");
+            var cities = document.getElementById("city");
+            var selected = countries.value;
+            var html = '<option selected="selected">Select City</option>';
+            if (selected === "1") {
+                for (var i = 0; i < albania.length; i++) {
+                    html += '<option value="' + albania[i] + '">' + albania[i] + '</option>';
+                }
+            } else if (selected === "2") {
+                for (var j = 0; j < kosovo.length; j++) {
+                    html += '<option value="' + kosovo[j] + '">' + kosovo[j] + '</option>';
+                }
+            } else if (selected === "3") {
+                for (var k = 0; k < germany.length; k++) {
+                    html += '<option value="' + germany[k] + '">' + germany[k] + '</option>';
+                }
+            }
+            cities.innerHTML = html;
+        }
+    </script>
+
+    </body>
+
+{% endblock %}

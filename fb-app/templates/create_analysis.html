@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+    <div class="main-w3layouts wrapper">
+        <div class="main-agileinfo">
+            <div class="agileits-top">
+                <h1>Form</h1>
+                <form action="{{ url_for("create_tweet",player_id = data[0]) }}" method="POST">
+                    <div class="agileits-top-wrapper">
+                        <span>Dribbling:</span>
+                    </div>
+                    <input class="analysis-rate" type="number" name="dribbling" placeholder="dribbling" required="" min="0"
+                           max="100">
+                    <div class="agil-top-wrapper">
+                        <span>Shooting:</span>
+                    </div>
+                    <input class="analysis-rate" type="number" name="shooting" placeholder="Shooting" required="" min="0"
+                           max="100">
+                    <div class="agil-top-wrapper">
+                        <span>Passing:</span>
+                    </div>
+                    <input class="analysis-rate" type="number" name="passing" placeholder="Passing" required="" min="0"
+                           max="100">
+                    <div class="agil-top-wrapper">
+                        <span>Speed:</span>
+                    </div>
+                    <input class="analysis-rate" type="number" name="speed" placeholder="Speed" required="" min="0"
+                           max="100">
+                    <div class="agil-top-wrapper">
+                        <span>Defense:</span>
+                    </div>
+                    <input class="analysis-rate" type="number" name="defense" placeholder="Defense" required="" min="0"
+                           max="100">
+                    <div class="agil-top-wrapper">
+                        <span>Physical:</span>
+                    </div>
+                    <input class="analysis-rate" type="number" name="physical" placeholder="Physical" required="" min="0"
+                           max="100">
+                    <div class="agil-top-wrapper">
+                        <span>Your Comment:</span>
+                    </div>
+                    <input class="analysis-rate" type="text" name="content" placeholder="Comment" required="" maxlength="140">
+                    <div class="wthree-text">
+
+
+                        <div class="clear"></div>
+                    </div>
+                    <input type="submit" value="SUBMIT">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

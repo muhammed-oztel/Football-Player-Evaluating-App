@@ -1,0 +1,141 @@
+{% if session['logged_in'] %}
+    {% extends "layout.html" %}
+{% else %}
+    {% extends "template.html" %}
+{% endif %}
+{% block content %}
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+        <meta name="viewport" content="width=device-width, initial-
+        scale=1">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/index.css">
+
+               <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+        <!-- Title Page-->
+        <title>Dashboard</title>
+
+        <!-- Fontfaces CSS-->
+        <link href="../static/CoolAdmin-master/css/font-face.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet"
+              media="all">
+        <link href="../static/CoolAdmin-master/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet"
+              media="all">
+        <link href="../static/CoolAdmin-master/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet"
+              media="all">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Bootstrap CSS-->
+        <link href="../static/CoolAdmin-master/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+        <!-- Vendor CSS-->
+        <link href="../static/CoolAdmin-master/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
+              rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/wow/animate.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/slick/slick.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet"
+              media="all">
+
+        <!-- Main CSS-->
+        <link href="../static/CoolAdmin-master/css/theme.css" rel="stylesheet" media="all">
+    </head>
+    <body>
+    <div class="page-wrapper" style="min-height: 600px; background-color: white;margin-bottom: 50px;">
+    <h1>
+        <center>Library</center>
+    </h1>
+    <form class="example" method="post" action=""
+          style="margin:auto;max-width:600px">
+        <label for="filters">Choose a Filter:</label>
+        <select name="filters" id="filters">
+            <option value="name">Name</option>
+            <option value="team">Team</option>
+            <option value="position">Position</option>
+            <option value="nation">Nationality</option>
+            <option value="overall">Overall Over</option>
+
+        </select>
+        <br><br>
+        <input type="text" placeholder="Enter related value" name="entered">
+        <button type="submit"><i class="fa fa-search"></i>
+        </button>
+    </form>
+    <p></p>
+    <center>
+        {% if not data %}
+            <p>No Displayable Data!</p>
+        {% else %}
+            <div class="w3-container">
+                <h2>Result Table</h2>
+                <table class="sortable">
+                    <thead>
+                    <tr class="w3-light-green">
+                        <th>Player Photo</th>
+                        <th>Player Name</th>
+                        <th>Nationality</th>
+                        <th>Current Team</th>
+                        <th>Position</th>
+                        <th>Overall</th>
+                    </tr>
+                    </thead>
+                    {% for item in data %}
+                        <tr>
+                            <td>
+                                <div class="avatar">
+                                    <div class="avatar-portrait">
+                                        <img src={{ "."+ item[-1] }}/>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><a href={{ "/players/player_id=" }}{{ item[0] }}>{{ item[1] }}</a></td>
+                            <td>{{ item[2] }}</td>
+                            <td>{{ item[3] }}</td>
+                            <td>{{ item[4] }}</td>
+                            <td>{{ (item[5]) }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+    </center>
+</div>
+    <script src="/static/sorttable.js" type="text/javascript"></script>
+    <!-- Jquery JS-->
+    <script src="../static/CoolAdmin-master/vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="../static/CoolAdmin-master/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="../static/CoolAdmin-master/vendor/slick/slick.min.js">
+    </script>
+    <script src="../static/CoolAdmin-master/vendor/wow/wow.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/animsition/animsition.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="../static/CoolAdmin-master/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="../static/CoolAdmin-master/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="../static/CoolAdmin-master/js/main.js"></script>
+    </body>
+    </html>
+
+{% endblock %}

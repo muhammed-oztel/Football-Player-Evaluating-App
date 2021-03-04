@@ -1,0 +1,81 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+     <body>
+        <div class="tweet-body">
+            <div class="tweet-wrapper">
+                {% if data %}
+                    {% for d in data %}
+                        <div class="tweet-row">
+                            <div class="user-data">
+                                <div class="img">
+                                    <img src={{ d[19] }}/>
+                                </div>
+                                <div class="user-info">
+                                    <h1>{{ d[13].capitalize() +" " + d[14].capitalize() }}</h1>
+                                    <a style="text-decoration:none" href={{ "/users/" }}{{  d[16]  }}>
+                                        <h2>{{ d[16] }}</h2></a>
+                                    <h2>{{ d[1] }}</h2>
+                                </div>
+                            </div>
+                            <hr style="width:85%;">
+                            <div class="analysis-info">
+                                <div class="player-info">
+                                    <div class="avatar2">
+                                        <div class="avatar-portrait">
+                                            <img src={{ "."+d[-1] }}/>
+                                        </div>
+                                        <div class="avatar-data">
+                                            <h1>{{ d[-8] }}</h1>
+                                            <h2>{{ d[-12] + " - " + d[-6] }} </h2>
+                                        </div>
+                                    </div>
+                                    <div class="avatar-overall-rate">
+                                        <h1>{{ d[11] }}</h1>
+                                    </div>
+                                </div>
+                                <div class="skill-row">
+                                    <div class="skill-bar">
+                                        <h1>SHOOTING: </h1>
+                                        <h1>{{ d[5] }}</h1>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <h1>DRIBBLING: </h1>
+                                        <h1>{{ d[6] }}</h1>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <h1>PASSING: </h1>
+                                        <h1> {{ d[7] }}</h1>
+                                    </div>
+                                </div>
+                                <div class="skill-row">
+                                    <div class="skill-bar">
+                                        <h1>PHYSICAL: </h1>
+                                        <h1>{{ d[8] }}</h1>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <h1>SPEED: </h1>
+                                        <h1>{{ d[9] }}</h1>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <h1>DEFENSE: </h1>
+                                        <h1> {{ d[10] }}</h1>
+                                    </div>
+                                </div>
+                                <div class="skill-row">
+                                    <span>{{ d[2] }}</span>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h1>No info Found</h1>
+                {% endif %}
+            </div>
+        </div>
+        </body>
+
+{% endblock %}

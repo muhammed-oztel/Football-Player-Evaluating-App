@@ -1,0 +1,370 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+        <!-- Title Page-->
+        <title>Dashboard</title>
+
+        <!-- Fontfaces CSS-->
+        <link href="../static/CoolAdmin-master/css/font-face.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet"
+              media="all">
+        <link href="../static/CoolAdmin-master/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet"
+              media="all">
+        <link href="../static/CoolAdmin-master/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet"
+              media="all">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Bootstrap CSS-->
+        <link href="../static/CoolAdmin-master/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+        <!-- Vendor CSS-->
+        <link href="../static/CoolAdmin-master/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
+              rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/wow/animate.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/slick/slick.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet"
+              media="all">
+
+        <!-- Main CSS-->
+        <link href="../static/CoolAdmin-master/css/theme.css" rel="stylesheet" media="all">
+
+    </head>
+
+    <body class="animsition">
+    <div class="page-wrapper">
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             aria-hidden="true" id="ornekModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title">Add Analysis</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <form class="from_modal" method="POST" action={{ "/players/player_id=" }}{{ data.info[0] }}>
+                        <div class="modal-body">
+                            <p>Dribbling</p>
+                            <input type="number" name="dribbling" min="1" max="100">
+                            <p>Shooting</p>
+                            <input type="number" name="shooting" min="1" max="100">
+                            <p>Physical</p>
+                            <input type="number" name="physical" min="1" max="100">
+                            <p>Speed</p>
+                            <input type="number" name="speed" min="1" max="100">
+                            <p>Defense</p>
+                            <input type="number" name="defense" min="1" max="100">
+                            <p>Passing</p>
+                            <input type="number" name="passing" min="1" max="100">
+                            <p>Your Comment About Player</p>
+                            <textarea class="form-control" id="message-text" name="content" maxlength="140"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+
+            <div class="container">
+                {% for message in get_flashed_messages() %}
+                    <div class="alert alert-warning">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                {% block page_content %}{% endblock %}
+            </div>
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <h2 class="title-1">Player Data</h2>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row m-t-25">
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="overview-item overview-item--c0">
+                                    <div class="player-img">
+                                        <img src={{ '.' + data.info[-1] }} alt="Picture"/>
+                                    </div>
+                                    <div class="general-info">
+                                        <div class="general-text">
+                                            <p>Player Name</p>
+                                            <span>{{ data.info[1] }}</span>
+                                        </div>
+                                        <div class="general-text">
+                                            <p>Nationality</p>
+                                            <span>{{ data.info[2] }}</span>
+                                        </div>
+                                        <div class="general-text">
+                                            <p>Birthday</p>
+                                            <span>{{ data.info[4] }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="general-info">
+                                        <div class="general-text">
+                                            <p>Height</p>
+                                            <span>{{ data.info[5] }} {{ " cm" }}</span>
+                                        </div>
+                                        <div class="general-text">
+                                            <p>Weight</p>
+                                            <span>{{ data.info[6] }} {{ " kg" }}</span>
+                                        </div>
+                                        <div class="general-text">
+                                            <p>Preferred Foot</p>
+                                            <span>{{ data.info[7] }}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="overview-item overview-item--c5">
+                                    <div class="general-info">
+                                        <div class="general-text">
+                                            <p>Team</p>
+                                            <span>{{ data.team[1] }}</span>
+                                        </div>
+                                        <div class="general-text">
+                                            <p>Joined</p>
+                                            <span>{{ data.team[2] }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="general-info">
+                                        <div class="general-text">
+                                            <p>Position</p>
+                                            <span>{{ data.info[3] }}</span>
+                                        </div>
+                                        <div class="general-text">
+                                            <p>Contract ends</p>
+                                            <span>{{ data.team[3] }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="general-info">
+                                        <div class="player-img">
+                                            <img src={{ data.team[-1] }}
+                                                         alt="club"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="au-card recent-report">
+                                {% if data %}
+                                    <canvas id="player-radar"></canvas>
+                                    <script>
+                                        var ctx = document.getElementById('player-radar').getContext('2d');
+                                        var myChart = new Chart(ctx, {
+                                            type: 'radar',
+                                            data: {
+                                                labels: ['Dribbling ', 'Shooting', 'Physical', 'Speed', 'Defense', 'Passing'],
+                                                datasets: [{
+                                                    label: 'FIFA rate',
+                                                    data: [{{data.fifa[2]}}, {{data.fifa[3]}}, {{data.fifa[4]}}, {{data.fifa[5]}}, {{data.fifa[6]}}, {{data.fifa[7]}}],
+                                                    backgroundColor: 'rgba(255,0,0,0.3)',
+                                                    borderColor: [
+                                                        'rgba(255,99,132,1)'
+                                                    ],
+                                                    borderWidth: 4
+                                                },
+                                                ],
+                                            },
+                                            options: {
+                                                scale: {
+                                                    angleLines: {
+                                                        display: false
+                                                    },
+                                                    ticks: {
+                                                        suggestedMin: 0,
+                                                        suggestedMax: 100
+                                                    }
+                                                }
+                                            },
+                                        });
+                                    </script>
+                                {% else %}
+                                    <h1>No info Found</h1>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="overview-item--c2">
+                                        <form action={{ "/players/create_analysis=" }}{{ data.info[0] }}>
+                                            <button class="au-btn au-btn-icon au-btn--blue">
+                                                <i class="zmdi zmdi-plus"></i>add analysis
+                                            </button>
+                                        </form>
+                                    </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row m-t-25">
+                        <div class="col-sm-12 col-lg-12">
+                            <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+                                <div class="au-card-title"
+                                     style="background-image:url('../static/img/card-bg/ball-stadium.jpg');">
+                                    <div class="bg-overlay bg-overlay--blue"></div>
+                                    <h3>
+                                        <i class="zmdi zmdi-comment-text"></i>Analysis</h3>
+
+                                </div>
+                                <div class="au-inbox-wrap">
+                                    <div class="au-message">
+                                        <div class="au-message-list3">
+                                            {% if data.tweets %}
+                                                {% for d in data.tweets %}
+                                                    <div class="tweet-row">
+                                                        <div class="user-data">
+                                                            <div class="img">
+                                                                <img src={{ d.user[7] }}/>
+                                                            </div>
+                                                            <div class="user-info">
+                                                                <h1>{{ d.user[1].capitalize() +" " + d.user[2].capitalize() }}</h1>
+                                                                <a style="text-decoration:none"
+                                                                   href={{ "/users/" + d.user[4] }}>
+                                                                    <h2>{{ d.user[4] }}</h2></a>
+                                                            </div>
+                                                        </div>
+                                                        <hr style="width:100%;align-self: center;">
+                                                        <div class="analysis-info">
+                                                            <div class="player-info">
+                                                                <div class="avatar2">
+                                                                    <div class="avatar-portrait">
+                                                                        <img src={{ "."+data.info[-1] }}/>
+                                                                    </div>
+                                                                    <div class="avatar-data">
+                                                                        <h1>{{ d.player[1] }}</h1>
+                                                                        <h2>{{ d.team[0] + " - " + d.player[-2] }} </h2>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="avatar-overall-rate">
+                                                                    <h1>{{ d.tweet[-1] }}</h1>
+                                                                </div>
+                                                            </div>
+                                                            <div class="skill-row">
+                                                                <div class="skill-bar">
+                                                                    <h1>SHOOTING: </h1>
+                                                                    <h1>{{ d.tweet[-7] }}</h1>
+                                                                </div>
+                                                                <div class="skill-bar">
+                                                                    <h1>DRIBBLING: </h1>
+                                                                    <h1>{{ d.tweet[-6] }}</h1>
+                                                                </div>
+                                                                <div class="skill-bar">
+                                                                    <h1>PASSING: </h1>
+                                                                    <h1> {{ d.tweet[-5] }}</h1>
+                                                                </div>
+                                                            </div>
+                                                            <div class="skill-row">
+                                                                <div class="skill-bar">
+                                                                    <h1>PHYSICAL: </h1>
+                                                                    <h1>{{ d.tweet[-4] }}</h1>
+                                                                </div>
+                                                                <div class="skill-bar">
+                                                                    <h1>SPEED: </h1>
+                                                                    <h1>{{ d.tweet[-3] }}</h1>
+                                                                </div>
+                                                                <div class="skill-bar">
+                                                                    <h1>DEFENSE: </h1>
+                                                                    <h1> {{ d.tweet[-2] }}</h1>
+                                                                </div>
+                                                            </div>
+                                                            <div class="skill-row">
+                                                                <span>{{ d.tweet[2] }}</span>
+
+                                                            </div>
+                                                        </div>
+                                                        {% if d.match %}
+                                                            <hr>
+                                                            <div class=match-info>
+                                                                <div class="home-team">
+                                                                    <h1>{{ d.match[5] }}</h1>
+                                                                </div>
+                                                                <div class="score">
+                                                                    <h2>{{ d.match[-1] }}</h2>
+                                                                </div>
+                                                                <div class="home-team">
+                                                                    <h1>{{ d.match[6] }}</h1>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                {% endfor %}
+                                            {% else %}
+                                                <h1>No info Found</h1>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="../static/CoolAdmin-master/vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="../static/CoolAdmin-master/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="../static/CoolAdmin-master/vendor/slick/slick.min.js">
+    </script>
+    <script src="../static/CoolAdmin-master/vendor/wow/wow.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/animsition/animsition.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="../static/CoolAdmin-master/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="../static/CoolAdmin-master/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="../static/CoolAdmin-master/js/main.js"></script>
+
+    </body>
+
+    </html>
+    <!-- end document-->
+{% endblock %}

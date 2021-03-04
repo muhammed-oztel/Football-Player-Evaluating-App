@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename="style.css") }}" type="text/css">
+
+    <title>Title</title>
+</head>
+   <body>
+    <div class="tweet-body">
+        <div class="tweet-wrapper">
+
+                <div class="tweet-row">
+                    <div class="user-data">
+                        <div class="img">
+                            <img src=""/>
+                        </div>
+                        <div class="user-info">
+                            <h1>21313</h1>
+                            <a style="text-decoration:none" href={{ "/users/" + d.user[4] }}><h2>{{ d.user[4] }}</h2></a>
+                        </div>
+                    </div>
+                    <hr style="width:85%;">
+                    <div class="analysis-info">
+                        <div class="player-info">
+                            <div class="avatar">
+                                <div class="avatar-portrait">
+                                    <img src= {{"."+d.player[-1]}} />
+                                </div>
+                                <div class="avatar-data">
+                                    <h1>{{ d.player[1] }}</h1>
+                                    <h2>{{ d.team[0] + " - " + d.player[-2] }} </h2>
+                                </div>
+                            </div>
+                            <div class="avatar-overall-rate">
+                                <h1>{{d.tweet[-1]}}</h1>
+                            </div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-bar">
+                                <h1>SHOOTING: </h1>
+                                <h1>{{d.tweet[-7]}}</h1>
+                            </div>
+                            <div class="skill-bar">
+                                <h1>DRIBBLING: </h1>
+                                <h1>{{d.tweet[-6]}}</h1>
+                            </div>
+                            <div class="skill-bar">
+                                <h1>PASSING: </h1>
+                                <h1> {{d.tweet[-5]}}</h1>
+                            </div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-bar">
+                                <h1>PHYSICAL: </h1>
+                                <h1>{{d.tweet[-4]}}</h1>
+                            </div>
+                            <div class="skill-bar">
+                                <h1>SPEED: </h1>
+                                <h1>{{d.tweet[-3]}}</h1>
+                            </div>
+                            <div class="skill-bar">
+                                <h1>DEFENSE: </h1>
+                                <h1> {{d.tweet[-2]}}</h1>
+                            </div>
+                        </div>
+                        <div class="skill-row">
+                            <span>{{d.tweet[2]}}</span>
+
+                        </div>
+                    </div>
+                    <hr style="width:85%;">
+                    <div class=match-info>
+                        <div class="home-team">
+                            <h1>Barcelona</h1>
+                        </div>
+                        <div class="score">
+                            <h2>3 : 3</h2>
+                        </div>
+                        <div class="home-team">
+                            <h1>Real Madrid</h1>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <h1>No info Found</h1>
+            {% endif %}
+        </div>
+    </div>
+    </body>
+</html>

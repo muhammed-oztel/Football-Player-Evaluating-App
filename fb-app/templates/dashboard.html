@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+    <body>
+    <div class="tweet-body">
+        <div class="tweet-wrapper">
+            {% if data %}
+                {% for d in data %}
+                    <div class="tweet-row">
+                        <div class="user-data">
+                            <div class="img">
+                                <img src={{ d.user[7] }}/>
+                            </div>
+                            <div class="user-info">
+                                <h1>{{ d.user[1].capitalize() +" " + d.user[2].capitalize() }}</h1>
+                                <a style="text-decoration:none" href={{ "/users/" + d.user[4] }}>
+                                    <h2>{{ d.user[4] }}</h2></a>
+                            </div>
+                        </div>
+                        <hr style="width:85%;">
+                        <div class="analysis-info">
+                            <div class="player-info">
+                                <div class="avatar2">
+                                    <div class="avatar-portrait">
+                                        <img src={{ "."+d.player[-1] }}/>
+                                    </div>
+                                    <div class="avatar-data">
+                                        <h1>{{ d.player[1] }}</h1>
+                                        <h2>{{ d.team[0] + " - " + d.player[-2] }} </h2>
+                                    </div>
+                                </div>
+                                <div class="avatar-overall-rate">
+                                    <h1>{{ d.tweet[-1] }}</h1>
+                                </div>
+                            </div>
+                            <div class="skill-row">
+                                <div class="skill-bar">
+                                    <h1>SHOOTING: </h1>
+                                    <h1>{{ d.tweet[-7] }}</h1>
+                                </div>
+                                <div class="skill-bar">
+                                    <h1>DRIBBLING: </h1>
+                                    <h1>{{ d.tweet[-6] }}</h1>
+                                </div>
+                                <div class="skill-bar">
+                                    <h1>PASSING: </h1>
+                                    <h1> {{ d.tweet[-5] }}</h1>
+                                </div>
+                            </div>
+                            <div class="skill-row">
+                                <div class="skill-bar">
+                                    <h1>PHYSICAL: </h1>
+                                    <h1>{{ d.tweet[-4] }}</h1>
+                                </div>
+                                <div class="skill-bar">
+                                    <h1>SPEED: </h1>
+                                    <h1>{{ d.tweet[-3] }}</h1>
+                                </div>
+                                <div class="skill-bar">
+                                    <h1>DEFENSE: </h1>
+                                    <h1> {{ d.tweet[-2] }}</h1>
+                                </div>
+                            </div>
+                            <div class="skill-row">
+                                <span>{{ d.tweet[2] }}</span>
+
+                            </div>
+                        </div>
+                        {% if d.match %}
+                            <hr>
+                            <div class=match-info>
+                                <div class="home-team">
+                                    <h1>{{ d.match[5] }}</h1>
+                                </div>
+                                <div class="score">
+                                    <h2>{{ d.match[-1] }}</h2>
+                                </div>
+                                <div class="home-team">
+                                    <h1>{{ d.match[6] }}</h1>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h1>No info Found</h1>
+            {% endif %}
+        </div>
+    </div>
+    </body>
+{% endblock %}

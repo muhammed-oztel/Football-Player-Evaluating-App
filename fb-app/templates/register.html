@@ -1,0 +1,27 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+<section class="register-section">
+
+    <div class="main-w3layouts wrapper">
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+                <h1>Register Form</h1>
+				<form action="/register" method="post">
+					<input class="text nick" type="text" name="nick" placeholder="User Nick" required="">
+					<input class="text name" type="text" name="name" placeholder="Name" required="">
+					<input class="text surname" type="text" name="surname" placeholder="Surname" required="">
+                    <input class="text email" type="email" name="mail" placeholder="Email" required="">
+					<input class="text w3lpass" type="password" name="password" placeholder="Password" required="">
+					<div class="wthree-text">
+						<div class="clear"> </div>
+					</div>
+                    <input type="submit" value="REGISTER">
+				</form>
+				<p>Do yo have an Account? <a href="/login"> Login Now!</a></p>
+			</div>
+		</div>
+</section>
+
+{% endblock %}

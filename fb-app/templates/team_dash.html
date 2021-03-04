@@ -1,0 +1,259 @@
+
+
+{% if session['logged_in'] %}
+    {% extends "layout.html" %}
+{% else %}
+    {% extends "template.html" %}
+{% endif %}
+{% block content %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+        <!-- Title Page-->
+        <title>Dashboard</title>
+
+        <!-- Fontfaces CSS-->
+        <link href="../static/CoolAdmin-master/css/font-face.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet"
+              media="all">
+        <link href="../static/CoolAdmin-master/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet"
+              media="all">
+        <link href="../static/CoolAdmin-master/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet"
+              media="all">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Bootstrap CSS-->
+        <link href="../static/CoolAdmin-master/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+        <!-- Vendor CSS-->
+        <link href="../static/CoolAdmin-master/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
+              rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/wow/animate.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/slick/slick.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+        <link href="../static/CoolAdmin-master/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet"
+              media="all">
+
+        <!-- Main CSS-->
+        <link href="../static/CoolAdmin-master/css/theme.css" rel="stylesheet" media="all">
+
+    </head>
+
+    <body class="animsition">
+    <div class="page-wrapper">
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row m-t-25">
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="overview-item overview-item--c0">
+                                    <div class="player-img">
+                                        <img src={{ data.info[-1] }} alt="Picture"/>
+                                    </div>
+                                    <div class="general-info">
+                                        <div class="general-text">
+                                            <p>Team</p>
+                                            <span>{{ data.info[0] }}</span>
+                                        </div>
+                                        <div class="general-text">
+                                            <p>League</p>
+                                            <span>{{ data.info[2] }}</span>
+                                        </div>
+                                        <div class="general-text">
+                                            <p>Market Value</p>
+                                            <span>{{ "$" }}{{ data.info[4] }}{{ "M" }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="general-info">
+                                        <div class="general-text">
+                                            <p>Stadium</p>
+                                            <span>{{ data.stadium[0] }}</span>
+                                        </div>
+                                        <div class="general-text">
+                                            <p>City</p>
+                                            <span>{{ data.stadium[1] }}</span>
+                                        </div>
+                                        <div class="general-text">
+                                            <p>Capacity</p>
+                                            <span>{{ data.stadium[2] }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="au-card au-card--no-shadow au-card--no-pad m-b-40" >
+                                 <div class="au-card-title"
+                                         style="background-image:url('../static/img/card-bg/ball.jpg');">
+                                        <div class="bg-overlay bg-overlay--blue"></div>
+                                        <h3>
+                                            <i class="zmdi zmdi-calendar"></i>Team Fixture</h3>
+
+                                    </div>
+                                    <div class="au-inbox-wrap" >
+                                        <div class="au-message">
+                                            <div class="au-message-list" style="height: 900px">
+
+                                                {% for match in data.old %}
+
+                                                    <div class="au-message__item2">
+                                                        <div class="au-message__item-inner2">
+                                                            <div class="au-message__item-text">
+                                                                <div class="avatar-wrap">
+                                                                    <div class="avatar">
+                                                                        <img src={{ match[-5] }}    alt="player_photo">
+                                                                    </div>
+                                                                    <span>{{ match[-6] }}</span>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="au-message__item-text">
+                                                                <div class="avatar-wrap">
+                                                                    <div class="text">
+                                                                        <h2>{{ match[-1] }}</h2>
+                                                                        <span>{{ match[3] }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="au-message__item-text">
+                                                                <div class="avatar-wrap">
+                                                                    <div class="avatar">
+                                                                        <img src={{ match[-2] }}    alt="player_photo">
+                                                                    </div>
+                                                                    <span>{{ match[-3] }}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                                {% for match in data.next %}
+                                                    <div class="au-message__item2">
+
+                                                        <div class="au-message__item-inner2">
+                                                            <div class="au-message__item-text">
+                                                                <div class="avatar-wrap">
+                                                                    <div class="avatar">
+                                                                        <img src={{ match[-4] }} alt="player_photo">
+                                                                    </div>
+                                                                    <span>{{ match[-5] }}</span>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="au-message__item-text">
+                                                                <div class="avatar-wrap">
+                                                                    <div class="text">
+                                                                        <h2>VS</h2>
+                                                                        <span>{{ match[3] }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="au-message__item-text">
+                                                                <div class="avatar-wrap">
+                                                                    <div class="avatar">
+                                                                        <img src={{ match[-1] }}    alt="player_photo">
+                                                                    </div>
+                                                                    <span>{{ match[-2] }}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+                                    <div class="au-card-title"
+                                         style="background-image:url('../static/img/card-bg/ball-stadium.jpg');">
+                                        <div class="bg-overlay bg-overlay--blue"></div>
+                                        <h3>
+                                            <i class="zmdi zmdi-comment-text"></i>Football Players</h3>
+
+                                    </div>
+                                    <div class="au-inbox-wrap">
+                                        <div class="au-message">
+                                            <div class="au-message-list2">
+                                                {% for player in data.players %}
+                                                    <div class="au-message__item"
+                                                         onclick="location.href='{{ url_for("player_profile",player_id=player[0]) }}'">
+                                                        <div class="au-message__item-inner">
+                                                            <div class="au-message__item-text">
+                                                                <div class="avatar-wrap">
+                                                                    <div class="avatar">
+                                                                        <img src={{ "." + player[-3] }}
+                                                                                     alt="player_photo">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="text">
+                                                                    <a href={{ url_for("player_profile",player_id=player[0]) }}>
+                                                                        <h5 class="name">{{ player[1] }}</h5>
+                                                                    </a>
+                                                                    <p>{{ player[5] }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="au-message__item-time">
+                                                                <span>{{ player[3] }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MAIN CONTENT-->
+    <!-- END PAGE CONTAINER-->
+    </div>
+
+
+    <!-- Jquery JS-->
+    <script src="../static/CoolAdmin-master/vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="../static/CoolAdmin-master/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="../static/CoolAdmin-master/vendor/slick/slick.min.js">
+    </script>
+    <script src="../static/CoolAdmin-master/vendor/wow/wow.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/animsition/animsition.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="../static/CoolAdmin-master/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="../static/CoolAdmin-master/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="../static/CoolAdmin-master/vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="../static/CoolAdmin-master/js/main.js"></script>
+
+    </body>
+
+    </html>
+    <!-- end document-->
+{% endblock %}

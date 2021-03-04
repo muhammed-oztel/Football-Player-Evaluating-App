@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename="style.css") }}" type="text/css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/f0048c3f0f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <a href="/" class="logo">Scout</a>
+    <div class="menu-toggle"></div>
+    <nav>
+        <ul>
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/login">Log In</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+    </nav>
+    <div class="clearfix"></div>
+</header>
+
+<script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.menu-toggle').click(function () {
+            $('.menu-toggle').toggleClass('active')
+            $('nav').toggleClass('active')
+        })
+    })
+</script>
+
+
+
+{% block content %}
+
+
+
+{% endblock %}
+
+<!--Footer -->
+<div class="footer">
+    <div class="footer-content">
+        <div class="footer-section about">
+            <h1 class="logo-text"><span>Scout</span>Sehir</h1>
+            <p>
+                ScoutSehir is a platform for football players and football fans.
+                Fans can scout and analyse football players and see their growths.
+            </p>
+            <div class="contact">
+                <span><i class="fas fa-phone">&nbsp; 0(507)193 61 25</i></span>
+                <span><i class="fas fa-envelope">&nbsp; info@scoutsehir.com</i></span>
+            </div>
+            <div class="socials">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-section links">
+        <h2>Quick Links</h2>
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Log In</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        </div>
+
+
+        <div class="footer-section sponsorts">
+
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; Oztel Production| Designed by Muhammed Fatih Oztel
+    </div>
+</div>
+<!--Footer -->
+
+
+</body>
+</html>
